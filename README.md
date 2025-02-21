@@ -45,8 +45,10 @@ Saat scene MainLevel dijalankan, objek pesawat langsung jatuh menembus objek pla
 ### 5. Pada scene MainLevel, coba manipulasi atribut Position, Rotation, dan Scale milik node BlueShip secara bebas. Apa yang terjadi pada visualisasi BlueShip di Viewport?
 
 ![1](/readme_img/1.png)
+
 ![2](/readme_img/2.png)
 ![3](/readme_img/3.png)
+
 ![4](/readme_img/4.png)
  
 Visualisasi BlueShip di viewport berubah position dan rotation-nya, namun scale-nya tidak berubah. Setelah saya teliti lebih lanjut, sepertinya hal ini terjadi karena perubahan size pada RigidBody2D akan di-override oleh physics engine saat game-nya dijalankan. Pop-up warning ini juga dapat dilihat pada screenshoot di atas.
