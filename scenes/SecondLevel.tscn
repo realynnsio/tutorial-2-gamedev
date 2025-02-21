@@ -1,11 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://b4umxylxerc3u"]
+[gd_scene load_steps=10 format=3 uid="uid://b4umxylxerc3u"]
 
 [ext_resource type="Script" path="res://scenes/PlatformRed.gd" id="1_2vfbx"]
+[ext_resource type="Texture2D" uid="uid://dkwlobgtnnfg8" path="res://assets/sky2.png" id="1_fj8o5"]
 [ext_resource type="PackedScene" uid="uid://bb8b2vt8qokfp" path="res://scenes/SnowPlatform.tscn" id="2_tyvnt"]
 [ext_resource type="PackedScene" uid="uid://ho3aouw67bf4" path="res://scenes/GreenShip.tscn" id="3_ixvrx"]
 [ext_resource type="Script" path="res://scenes/ObjectiveArea2.gd" id="4_idx2q"]
-[ext_resource type="Texture2D" uid="uid://dh610bbucs6rh" path="res://assets/fasilkom.png" id="5_gpdnr"]
 [ext_resource type="Script" path="res://scenes/FallArea.gd" id="5_nlemq"]
+[ext_resource type="Texture2D" uid="uid://dnh63sc61u7" path="res://assets/goal.png" id="5_rjs5f"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(138.75, 79)
@@ -14,13 +15,13 @@ size = Vector2(138.75, 79)
 
 [node name="SecondLevel" type="Node"]
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.277205, 0.607041, 0.734802, 1)
+texture = ExtResource("1_fj8o5")
 
 [node name="PlatformRed" type="Node2D" parent="."]
 position = Vector2(35, 565)
@@ -51,9 +52,8 @@ position = Vector2(1081, 39)
 shape = SubResource("1")
 
 [node name="Sprite2D" type="Sprite2D" parent="ObjectiveArea2"]
-position = Vector2(1082, 39)
-scale = Vector2(0.92, 0.493548)
-texture = ExtResource("5_gpdnr")
+position = Vector2(1082, 38)
+texture = ExtResource("5_rjs5f")
 
 [node name="GreenShip" parent="." instance=ExtResource("3_ixvrx")]
 position = Vector2(139, 408)

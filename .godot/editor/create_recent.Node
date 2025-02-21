@@ -1,4 +1,5 @@
 Sprite2D
+TextureRect
 ColorRect
 CollisionShape2D
 Area2D
