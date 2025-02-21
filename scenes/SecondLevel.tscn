@@ -1,14 +1,26 @@
-[gd_scene load_steps=6 format=3 uid="uid://b4umxylxerc3u"]
+[gd_scene load_steps=9 format=3 uid="uid://b4umxylxerc3u"]
 
 [ext_resource type="Script" path="res://scenes/PlatformRed.gd" id="1_2vfbx"]
 [ext_resource type="PackedScene" uid="uid://bb8b2vt8qokfp" path="res://scenes/SnowPlatform.tscn" id="2_tyvnt"]
 [ext_resource type="PackedScene" uid="uid://ho3aouw67bf4" path="res://scenes/GreenShip.tscn" id="3_ixvrx"]
-[ext_resource type="Script" path="res://scenes/ObjectiveArea.gd" id="4_qqq7a"]
+[ext_resource type="Script" path="res://scenes/ObjectiveArea2.gd" id="4_idx2q"]
+[ext_resource type="Texture2D" uid="uid://dh610bbucs6rh" path="res://assets/fasilkom.png" id="5_gpdnr"]
+[ext_resource type="Script" path="res://scenes/FallArea.gd" id="5_nlemq"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(138.75, 79)
 
-[node name="MainLevel" type="Node"]
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_i8iin"]
+
+[node name="SecondLevel" type="Node"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.277205, 0.607041, 0.734802, 1)
 
 [node name="PlatformRed" type="Node2D" parent="."]
 position = Vector2(35, 565)
@@ -31,14 +43,27 @@ position = Vector2(210, 0)
 [node name="SnowPlatform6" parent="PlatformRed" instance=ExtResource("2_tyvnt")]
 position = Vector2(210, -70)
 
-[node name="GreenShip" parent="." instance=ExtResource("3_ixvrx")]
-position = Vector2(139, 408)
+[node name="ObjectiveArea2" type="Area2D" parent="."]
+script = ExtResource("4_idx2q")
 
-[node name="ObjectiveArea" type="Area2D" parent="."]
-script = ExtResource("4_qqq7a")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ObjectiveArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ObjectiveArea2"]
 position = Vector2(1081, 39)
 shape = SubResource("1")
 
-[connection signal="body_entered" from="ObjectiveArea" to="ObjectiveArea" method="_on_ObjectiveArea_body_entered"]
+[node name="Sprite2D" type="Sprite2D" parent="ObjectiveArea2"]
+position = Vector2(1082, 39)
+scale = Vector2(0.92, 0.493548)
+texture = ExtResource("5_gpdnr")
+
+[node name="GreenShip" parent="." instance=ExtResource("3_ixvrx")]
+position = Vector2(139, 408)
+
+[node name="FallArea" type="Area2D" parent="."]
+script = ExtResource("5_nlemq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FallArea"]
+position = Vector2(576, 772)
+shape = SubResource("WorldBoundaryShape2D_i8iin")
+
+[connection signal="body_entered" from="ObjectiveArea2" to="ObjectiveArea2" method="_on_ObjectiveArea_body_entered"]
+[connection signal="body_entered" from="FallArea" to="FallArea" method="_on_FallArea_body_entered"]

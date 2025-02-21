@@ -1,14 +1,27 @@
-[gd_scene load_steps=6 format=3 uid="uid://cdoksexcakmop"]
+[gd_scene load_steps=10 format=3 uid="uid://cdoksexcakmop"]
 
 [ext_resource type="PackedScene" uid="uid://y5a4e3ajuy2r" path="res://scenes/StonePlatform.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://datfp8kxjrjg" path="res://scenes/BlueShip.tscn" id="2"]
 [ext_resource type="Script" path="res://scenes/PlatformBlue.gd" id="3"]
 [ext_resource type="Script" path="res://scenes/ObjectiveArea.gd" id="4"]
+[ext_resource type="PackedScene" uid="uid://inosbxmslut7" path="res://scenes/scene_transition_rect.tscn" id="5_ggbmk"]
+[ext_resource type="Texture2D" uid="uid://dh610bbucs6rh" path="res://assets/fasilkom.png" id="5_tp31a"]
+[ext_resource type="Script" path="res://scenes/FallArea.gd" id="6_ky3cm"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(138.75, 79)
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ter1y"]
+
 [node name="MainLevel" type="Node"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.277205, 0.607041, 0.734802, 1)
 
 [node name="PlatformBlue" type="Node2D" parent="."]
 position = Vector2(35, 565)
@@ -19,10 +32,6 @@ script = ExtResource("3")
 [node name="StonePlatform2" parent="PlatformBlue" instance=ExtResource("1")]
 position = Vector2(70, 0)
 
-[node name="BlueShip" parent="." instance=ExtResource("2")]
-position = Vector2(72.7009, 421.901)
-lock_rotation = true
-
 [node name="ObjectiveArea" type="Area2D" parent="."]
 script = ExtResource("4")
 
@@ -30,4 +39,23 @@ script = ExtResource("4")
 position = Vector2(70.625, 40)
 shape = SubResource("1")
 
+[node name="Sprite2D" type="Sprite2D" parent="ObjectiveArea"]
+position = Vector2(71, 39)
+scale = Vector2(0.92, 0.493548)
+texture = ExtResource("5_tp31a")
+
+[node name="BlueShip" parent="." instance=ExtResource("2")]
+position = Vector2(72.7009, 421.901)
+lock_rotation = true
+
+[node name="SceneTransitionRect" parent="." instance=ExtResource("5_ggbmk")]
+
+[node name="FallArea" type="Area2D" parent="."]
+script = ExtResource("6_ky3cm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FallArea"]
+position = Vector2(576, 772)
+shape = SubResource("WorldBoundaryShape2D_ter1y")
+
 [connection signal="body_entered" from="ObjectiveArea" to="ObjectiveArea" method="_on_ObjectiveArea_body_entered"]
+[connection signal="body_entered" from="FallArea" to="FallArea" method="_on_FallArea_body_entered"]

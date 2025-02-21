@@ -1,0 +1,6 @@
+Sprite2D
+ColorRect
+CollisionShape2D
+Area2D
+AnimationPlayer
+RichTextLabel
